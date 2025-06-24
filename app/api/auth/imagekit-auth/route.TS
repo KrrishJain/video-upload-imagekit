@@ -1,13 +1,16 @@
 import { getUploadAuthParams } from "@imagekit/next/server"
 
 export async function GET() {
-
+    console.log("endpoint hit");
+    
     try {
         const authenticationParameter = getUploadAuthParams({
             privateKey: process.env.IMAGEKIT_PRIVATE_KEY as string,
             publicKey: process.env.NEXT_PUBLIC_PUBLIC_KEY as string,
 
         })
+        console.log(authenticationParameter);
+        
 
         return Response.json({ authenticationParameter, publicKey: process.env.NEXT_PUBLIC_PUBLIC_KEY })
     } catch (error) {

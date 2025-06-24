@@ -1,4 +1,4 @@
-import { IVideo } from './../../../models/Video.model';
+import { IVideo } from '../../../models/Video.model';
 import { authOptions } from "@/lib/auth";
 import { connectToDB } from "@/lib/db";
 import Video from "@/models/Video.model";
@@ -8,8 +8,12 @@ import { NextRequest, NextResponse } from "next/server";
 
 export async function GET(){
     try {
+        console.log("In get video cont");
+        
         await connectToDB()
         const videos = await Video.find({}).sort({createdAt: -1}).lean()
+        console.log(videos);
+        
 
         if (!videos || videos.length === 0) {
             return NextResponse.json([], {status:200})
